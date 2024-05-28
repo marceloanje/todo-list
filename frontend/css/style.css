@@ -32,7 +32,7 @@ header h1 {
 }
 
 main {
-    padding: 80px 250px 0px 250px;
+    padding: 80px 250px 200px 250px;
 }
 
 .add-form {
@@ -71,13 +71,24 @@ main {
 .task-container {
     display: flex;
     margin-top: 45px;
-    background-color: aqua;
     gap: 25px;
     align-items: center;
 }
 
-.md-50 {
+.check-box-outline {
     font-size: 50px !important;
+    color: #4285f4;
+    cursor: pointer;
+}
+
+.icon-edit {
+    font-size: 35px !important;
+    color: #525252;
+}
+
+.icon-delete {
+    font-size: 35px !important;
+    color: #dd5858;
 }
 
 .task-write {
@@ -88,7 +99,22 @@ main {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 45px;
+    padding-right: 25px;
+}
+
+.btn-action {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: inherit;
 }
 
 .task-write p {
