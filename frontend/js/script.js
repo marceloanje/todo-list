@@ -33,6 +33,16 @@ const deleteTask = async (id) => {
     loadTasks();
 };
 
+const updateTask = async ({ id, title, status }) => {
+    await fetch(`http://localhost:3333/tasks/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, status }),
+    });
+
+    loadTasks();
+};
+
 const createElement = (tag, innerText = "", innerHTML = "") => {
     const element = document.createElement(tag);
 
@@ -53,6 +63,8 @@ const createRow = (task) => {
     const editSpan = createElement("span", "edit");
     const deleteButton = createElement("button");
     const deleteSpan = createElement("span", "delete");
+    const editForm = createElement("form");
+    const editInput = createElement("input");
 
     divTask.classList.add("task-container");
     checkBoxSpan.classList.add(
@@ -66,6 +78,20 @@ const createRow = (task) => {
     deleteSpan.classList.add("material-symbols-outlined", "icon-delete");
 
     deleteButton.addEventListener("click", () => deleteTask(id));
+
+    editInput.classList.add("task-input");
+    editInput.value = title;
+    editForm.appendChild(editInput);
+    editForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        updateTask({ id, title: editInput.value, status });
+    });
+    editButton.addEventListener("click", () => {
+        pTitle.innerHTML = "";
+        pTitle.appendChild(editForm);
+        editInput.focus();
+    });
 
     editButton.appendChild(editSpan);
     deleteButton.appendChild(deleteSpan);

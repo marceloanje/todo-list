@@ -121,3 +121,11 @@ main {
     width: 100%;
     padding: 19px 0 18px 30px;
 }
+
+.task-input {
+    background-color: #edf1f7;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #141414;
+}
