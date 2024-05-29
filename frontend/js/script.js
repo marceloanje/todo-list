@@ -1,10 +1,28 @@
 const mainElement = document.querySelector("main");
+const tasksList = document.querySelector(".tasks-list");
+const addForm = document.querySelector(".add-form");
+const inputTask = document.querySelector(".input-task");
 
 const fetchTasks = async () => {
     const response = await fetch("http://localhost:3333/tasks");
     const tasks = await response.json();
 
     return tasks;
+};
+
+const addTask = async (event) => {
+    event.preventDefault();
+
+    const task = { title: inputTask.value };
+
+    await fetch("http://localhost:3333/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(task),
+    });
+
+    loadTasks();
+    inputTask.value = "";
 };
 
 const createElement = (tag, innerText = "", innerHTML = "") => {
@@ -47,7 +65,6 @@ const createRow = (task) => {
     divForm.appendChild(deleteButton);
     divTask.appendChild(checkBoxSpan);
     divTask.appendChild(divForm);
-    mainElement.appendChild(divTask);
 
     return divTask;
 };
@@ -55,10 +72,13 @@ const createRow = (task) => {
 const loadTasks = async () => {
     const tasks = await fetchTasks();
 
+    tasksList.innerHTML = "";
+
     tasks.forEach((task) => {
         const divTask = createRow(task);
-        mainElement.appendChild(divTask);
+        tasksList.appendChild(divTask);
     });
 };
 
+addForm.addEventListener("submit", addTask);
 loadTasks();
