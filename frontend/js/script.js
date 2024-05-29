@@ -25,6 +25,14 @@ const addTask = async (event) => {
     inputTask.value = "";
 };
 
+const deleteTask = async (id) => {
+    await fetch(`http://localhost:3333/tasks/${id}`, {
+        method: "DELETE",
+    });
+
+    loadTasks();
+};
+
 const createElement = (tag, innerText = "", innerHTML = "") => {
     const element = document.createElement(tag);
 
@@ -54,9 +62,10 @@ const createRow = (task) => {
     divForm.classList.add("task-write");
     editButton.classList.add("btn-action");
     editSpan.classList.add("material-symbols-outlined", "icon-edit");
-
     deleteButton.classList.add("btn-action");
     deleteSpan.classList.add("material-symbols-outlined", "icon-delete");
+
+    deleteButton.addEventListener("click", () => deleteTask(id));
 
     editButton.appendChild(editSpan);
     deleteButton.appendChild(deleteSpan);
