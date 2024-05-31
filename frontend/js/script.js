@@ -8,6 +8,8 @@ const mainElement = document.querySelector("main");
 const tasksList = document.querySelector(".tasks-list");
 const addForm = document.querySelector(".add-form");
 const inputTask = document.querySelector(".input-task");
+const dateHeader = document.querySelector(".date-header");
+const counterTasks = document.querySelector(".counter-tasks");
 
 const fetchTasks = async () => {
     const response = await fetch("http://localhost:3333/tasks");
@@ -134,8 +136,27 @@ const appendChildren = (parent, children) => {
     children.forEach((child) => parent.appendChild(child));
 };
 
+const updateDate = () => {
+    const todayDate = new Date();
+    const options = { day: "numeric", month: "long" };
+    const formattedDate = todayDate.toLocaleDateString("pt-BR", options);
+    const [day, month] = formattedDate.split(" de ");
+    dateHeader.innerHTML = `${day}, ${
+        month.charAt(0).toUpperCase() + month.slice(1)
+    }`;
+};
+
+const updateCounterTasks = (amountTasks) => {
+    if (amountTasks === 0) return (counterTasks.innerHTML = "Sem tarefas");
+    if (amountTasks === 1) return (counterTasks.innerHTML = `1 tarefa`);
+
+    return (counterTasks.innerHTML = `${amountTasks} tarefas`);
+};
+
 const loadTasks = async () => {
     const tasks = await fetchTasks();
+
+    updateCounterTasks(tasks.length);
 
     tasksList.innerHTML = "";
 
@@ -145,5 +166,6 @@ const loadTasks = async () => {
     });
 };
 
+updateDate();
 addForm.addEventListener("submit", addTask);
 loadTasks();
