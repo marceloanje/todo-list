@@ -1,3 +1,9 @@
+const ICONS = {
+    CHECKED: "check_box",
+    UNCHECKED: "check_box_outline_blank",
+    EDIT: "edit",
+    DELETE: "delete",
+};
 const mainElement = document.querySelector("main");
 const tasksList = document.querySelector(".tasks-list");
 const addForm = document.querySelector(".add-form");
@@ -52,56 +58,80 @@ const createElement = (tag, innerText = "", innerHTML = "") => {
     return element;
 };
 
-const createRow = (task) => {
-    const { id, title, created_at, status } = task;
-
+const createRow = ({ id, title, created_at, status }) => {
     const divTask = createElement("div");
-    const checkBoxSpan = createElement("span", "check_box_outline_blank");
+    const checkBoxSpan = createElement(
+        "span",
+        status === "concluido" ? ICONS.CHECKED : ICONS.UNCHECKED
+    );
     const divForm = createElement("div");
     const pTitle = createElement("p", title);
-    const editButton = createElement("button");
-    const editSpan = createElement("span", "edit");
-    const deleteButton = createElement("button");
-    const deleteSpan = createElement("span", "delete");
-    const editForm = createElement("form");
-    const editInput = createElement("input");
+    const editButton = createButton(ICONS.EDIT);
+    const deleteButton = createButton(ICONS.DELETE);
+    const editForm = createEditForm(title);
 
     divTask.classList.add("task-container");
     checkBoxSpan.classList.add(
         "material-symbols-outlined",
-        "check-box-outline"
+        "check-box-outline",
+        "no-select"
     );
     divForm.classList.add("task-write");
-    editButton.classList.add("btn-action");
-    editSpan.classList.add("material-symbols-outlined", "icon-edit");
-    deleteButton.classList.add("btn-action");
-    deleteSpan.classList.add("material-symbols-outlined", "icon-delete");
+
+    if (status === "concluido") pTitle.classList.add("p-conclued");
+    if (status === "pendente") pTitle.classList.remove("p-conclued");
 
     deleteButton.addEventListener("click", () => deleteTask(id));
 
-    editInput.classList.add("task-input");
-    editInput.value = title;
-    editForm.appendChild(editInput);
-    editForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        updateTask({ id, title: editInput.value, status });
+    checkBoxSpan.addEventListener("click", () => {
+        const newStatus = status === "concluido" ? "pendente" : "concluido";
+        checkBoxSpan.innerHTML =
+            newStatus === "concluido" ? ICONS.CHECKED : ICONS.UNCHECKED;
+        pTitle.classList.toggle("p-conclued", newStatus === "concluido");
+        updateTask({ id, title, status: newStatus });
     });
+
     editButton.addEventListener("click", () => {
         pTitle.innerHTML = "";
         pTitle.appendChild(editForm);
-        editInput.focus();
+        editForm.querySelector("input").focus();
     });
 
-    editButton.appendChild(editSpan);
-    deleteButton.appendChild(deleteSpan);
-    divForm.appendChild(pTitle);
-    divForm.appendChild(editButton);
-    divForm.appendChild(deleteButton);
-    divTask.appendChild(checkBoxSpan);
-    divTask.appendChild(divForm);
+    editForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        updateTask({
+            id,
+            title: editForm.querySelector("input").value,
+            status,
+        });
+    });
+
+    appendChildren(divForm, [pTitle, editButton, deleteButton]);
+    appendChildren(divTask, [checkBoxSpan, divForm]);
 
     return divTask;
+};
+
+const createButton = (icon) => {
+    const button = createElement("button");
+    const span = createElement("span", icon);
+    button.classList.add("btn-action");
+    span.classList.add("material-symbols-outlined", `icon-${icon}`);
+    button.appendChild(span);
+    return button;
+};
+
+const createEditForm = (title) => {
+    const form = createElement("form");
+    const input = createElement("input");
+    input.classList.add("task-input");
+    input.value = title;
+    form.appendChild(input);
+    return form;
+};
+
+const appendChildren = (parent, children) => {
+    children.forEach((child) => parent.appendChild(child));
 };
 
 const loadTasks = async () => {

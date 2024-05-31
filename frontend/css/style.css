@@ -129,3 +129,12 @@ main {
     font-size: 20px;
     color: #141414;
 }
+
+.no-select {
+    user-select: none;
+}
+
+.p-conclued {
+    font-style: italic;
+    text-decoration: line-through;
+}
