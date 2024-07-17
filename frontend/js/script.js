@@ -71,6 +71,7 @@ const createRow = ({ id, title, created_at, status }) => {
     const editButton = createButton(ICONS.EDIT);
     const deleteButton = createButton(ICONS.DELETE);
     const editForm = createEditForm(title);
+    const btnContainer = createElement("div");
 
     divTask.classList.add("task-container");
     checkBoxSpan.classList.add(
@@ -79,6 +80,7 @@ const createRow = ({ id, title, created_at, status }) => {
         "no-select"
     );
     divForm.classList.add("task-write");
+    btnContainer.classList.add("btn-container");
 
     if (status === "concluido") pTitle.classList.add("p-conclued");
     if (status === "pendente") pTitle.classList.remove("p-conclued");
@@ -108,7 +110,8 @@ const createRow = ({ id, title, created_at, status }) => {
         });
     });
 
-    appendChildren(divForm, [pTitle, editButton, deleteButton]);
+    appendChildren(btnContainer, [editButton, deleteButton]);
+    appendChildren(divForm, [pTitle, btnContainer]);
     appendChildren(divTask, [checkBoxSpan, divForm]);
 
     return divTask;

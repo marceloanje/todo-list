@@ -117,6 +117,11 @@ main {
     color: inherit;
 }
 
+.btn-container {
+    display: flex;
+    gap: 45px;
+}
+
 .task-write p {
     width: 100%;
     padding: 19px 0 18px 30px;
@@ -137,4 +142,55 @@ main {
 .p-conclued {
     font-style: italic;
     text-decoration: line-through;
+}
+
+@media (max-width: 900px) {
+    header {
+        height: 150px;
+    }
+
+    .div-header {
+        display: none;
+    }
+
+    header .material-symbols-outlined {
+        display: none;
+    }
+
+    header h1 {
+        font-size: 44px;
+        text-align: center;
+        flex: 1;
+    }
+
+    main {
+        padding: 20px 20px 20px 20px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .task-write {
+        align-items: flex-start;
+        max-width: 80%;
+    }
+
+    .btn-action {
+        margin: 5px 0;
+    }
+
+    .task-write p {
+        flex: 1;
+        margin: 0;
+        overflow-wrap: break-word;
+        white-space: normal;
+        width: 200px;
+    }
+
+    .btn-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        flex-shrink: 0;
+        gap: 10px;
+    }
 }
