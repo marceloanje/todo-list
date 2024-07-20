@@ -1,8 +1,20 @@
-const connection = require("./connection");
+const mysql = require("mysql2/promise");
+
+const pool = mysql.createPool({
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_NAME || "test",
+});
 
 const getAll = async () => {
-    const [tasks] = await connection.execute("SELECT * FROM tasks");
-    return tasks;
+    const connection = await pool.getConnection();
+    try {
+        const [tasks] = await connection.execute("SELECT * FROM tasks");
+        return tasks;
+    } finally {
+        connection.release();
+    }
 };
 
 const createTask = async (task) => {
