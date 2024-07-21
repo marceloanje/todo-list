@@ -39,8 +39,14 @@ const createTask = async (task) => {
 const deleteTask = async (id) => {
     const query = "DELETE FROM tasks WHERE id = ?";
 
-    const [remevedTask] = await connection.execute(query, [id]);
-    return remevedTask;
+    const connection = await pool.getConnection();
+
+    try {
+        const [remevedTask] = await connection.execute(query, [id]);
+        return remevedTask;
+    } finally {
+        connection.release();
+    }
 };
 
 const updateTask = async (id, task) => {
