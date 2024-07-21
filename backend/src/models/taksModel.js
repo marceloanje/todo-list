@@ -23,13 +23,17 @@ const createTask = async (task) => {
     const query =
         "INSERT INTO tasks(title, status, created_at) VALUES (?, ?, ?)";
 
-    const [createdTask] = await connection.execute(query, [
-        title,
-        "pendente",
-        dateUTC,
-    ]);
-
-    return { insertID: createdTask.insertId };
+    const connection = await pool.getConnection();
+    try {
+        const [createdTask] = await connection.execute(query, [
+            title,
+            "pendente",
+            dateUTC,
+        ]);
+        return { insertID: createdTask.insertId };
+    } finally {
+        connection.release();
+    }
 };
 
 const deleteTask = async (id) => {
