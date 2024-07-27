@@ -24,32 +24,24 @@ Um aplicativo de lista de tarefas construído com HTML, CSS e JavaScript no fron
 
 ### Gerenciamento de Tarefas
 
-(todolist.png)
+https://github.com/marceloanje/todo-list/todolist.png
 
 ---
 
 1. Criação de Nova Tarefa:
 
     > Permite ao usuário adicionar uma nova tarefa à lista, com inserção no banco de dados.
-    >
-    > ![Adicionar Tarefa](link-da-imagem-opcional)
 
 2. Exclusão de Tarefa:
 
     > Permite ao usuário excluir uma tarefa existente.
-    >
-    > ![Excluir Tarefa](link-da-imagem-opcional)
 
 3. Marcar Tarefa como Feita:
 
     > Permite ao usuário marcar uma tarefa como concluída.
-    >
-    > ![Marcar como Feita](link-da-imagem-opcional)
 
 4. Edição de Tarefa:
     > Permite ao usuário editar o conteúdo de uma tarefa existente.
-    >
-    > ![Editar Tarefa](link-da-imagem-opcional)
 
 ## Instalação e Uso
 
