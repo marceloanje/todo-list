@@ -24,7 +24,7 @@ Um aplicativo de lista de tarefas construído com HTML, CSS e JavaScript no fron
 
 ### Gerenciamento de Tarefas
 
-todolist.png
+![Texto Alternativo](todolist.png)
 
 ---
 
