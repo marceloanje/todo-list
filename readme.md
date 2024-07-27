@@ -24,6 +24,8 @@ Um aplicativo de lista de tarefas construído com HTML, CSS e JavaScript no fron
 
 ### Gerenciamento de Tarefas
 
+(todolist.png)
+
 ---
 
 1. Criação de Nova Tarefa:
@@ -70,4 +72,4 @@ Os serviços já estarão rodando após o comando docker-compose up. Verifique s
 
 4. Acesse o frontend.
 
-Para abrir o frontend, navegue até a pasta frontend e abra o arquivo HTML no seu navegador.
+Para abrir o frontend, navegue até a pasta frontend e abra o arquivo `index.html` no seu navegador.
