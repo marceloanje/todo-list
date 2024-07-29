@@ -45,13 +45,13 @@ Um aplicativo de lista de tarefas construído com HTML, CSS e JavaScript no fron
 
 ## Instalação e Uso
 
-## Requisitos
+### Requisitos
 
 Certifique-se de ter os seguintes requisitos instalados no seu sistema:
 
 -   **Docker**: Um ambiente de contêiner para garantir a consistência e portabilidade do software.
 
-## Passos
+### Passos
 
 1. **Clone o repositório**
 
