@@ -45,23 +45,31 @@ Um aplicativo de lista de tarefas construído com HTML, CSS e JavaScript no fron
 
 ## Instalação e Uso
 
-1. Clone o repositório
+## Requisitos
+
+Certifique-se de ter os seguintes requisitos instalados no seu sistema:
+
+-   **Docker**: Um ambiente de contêiner para garantir a consistência e portabilidade do software.
+
+## Passos
+
+1. **Clone o repositório**
 
 ```bash
 git clone https://github.com/marceloanje/todo-list.git
 cd todo-list/backend
 ```
 
-2. Configure o Docker Compose
+2. **Configure o Docker Compose**
 
 ```bash
 docker-compose up
 ```
 
-3. Inicialize o backend
+3. **Inicialize o backend**
 
 Os serviços já estarão rodando após o comando docker-compose up. Verifique se o backend está acessível em `http://localhost:3000`.
 
-4. Acesse o frontend.
+4. **Acesse o frontend**
 
 Para abrir o frontend, navegue até a pasta frontend e abra o arquivo `index.html` no seu navegador.
